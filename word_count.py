@@ -8,7 +8,7 @@ spark = (SparkSession
 # log-level keywords
 # off, fatal, error, warn, info, debug, trace, all
 
-spark.sparkContext.setLogLevel("KEYWORD")
+spark.sparkContext.setLogLevel("ERROR")
 
 # mapping our program
 # 1. read the input data
