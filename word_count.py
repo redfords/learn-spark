@@ -18,3 +18,6 @@ spark.sparkContext.setLogLevel("ERROR")
 # 5. return the top 10 (or 20, 50, 100)
 
 book = spark.read.text("./data/gutenberg_books/1342-0.txt")
+
+print(book)
+# DataFrame[value: string]
