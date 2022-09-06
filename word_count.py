@@ -3,6 +3,7 @@ from pyspark.sql import SparkSession
 spark = (SparkSession
         .builder
         .appName("Analyzing the vocabulary of Pride and Prejudice.")
+        .config("spark.sql.repl.eagerEval.enabled", "True")
         .getOrCreate())
 
 # log-level keywords
@@ -19,5 +20,14 @@ spark.sparkContext.setLogLevel("ERROR")
 
 book = spark.read.text("./data/gutenberg_books/1342-0.txt")
 
-print(book)
+# print(book)
 # DataFrame[value: string]
+
+# book.printSchema()
+# root
+#  |-- value: string (nullable = true)
+
+# print(book.dtypes)
+# [('value', 'string')]
+
+book.show(10, truncate=50)
