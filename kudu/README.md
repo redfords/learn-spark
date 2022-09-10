@@ -28,9 +28,13 @@ val df = spark.read.options(Map("kudu.master" -> "edh-master-01kc.root.corp:7051
 Python version 2.7.5
 Spark version 3.0.1
 
+Launch pyspark with the artifacts.
+
 ```
 pyspark --packages org.apache.kudu:kudu-spark3_2.12:1.13.0.7.1.5.0-257 --repositories https://repository.cloudera.com/artifactory/cloudera-repos/
 ```
+
+Create a dataframe to query the Kudu table.
 
 ```
 kuduDF = spark.read.format('org.apache.kudu.spark.kudu').option('kudu.master',"edh-master-01kc.root.corp:7051").option('kudu.table',"impala::de_ber_4con.can_ges_contact_center_ft").load()
