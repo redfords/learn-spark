@@ -33,6 +33,8 @@ book = spark.read.text("./data/gutenberg_books/1342-0.txt")
 
 book.show(10, truncate=50)
 
+book.show(10, truncate=False, vertical=True)
+
 lines = book.select(split(book.value, " ").alias("line"))
 lines.printSchema()
 lines.show(5)
