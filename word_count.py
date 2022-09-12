@@ -1,5 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import split
+from pyspark.sql.functions import col
 
 spark = (SparkSession
         .builder
@@ -35,9 +36,18 @@ book.show(10, truncate=50)
 
 book.show(10, truncate=False, vertical=True)
 
+# simple column transformation
+
 lines = book.select(split(book.value, " ").alias("line"))
 lines.printSchema()
 lines.show(5)
 
 # all sparksql functions
 # https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/functions.html
+
+
+# the simplest select statement
+book.select(book.value)
+book.select(book["value"])
+book.select(col("value"))
+book.select("value")
