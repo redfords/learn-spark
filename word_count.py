@@ -1,6 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import split
-from pyspark.sql.functions import col
+from pyspark.sql.functions import explode, col, split
 
 spark = (SparkSession
         .builder
@@ -22,18 +21,17 @@ spark.sparkContext.setLogLevel("ERROR")
 
 book = spark.read.text("./data/gutenberg_books/1342-0.txt")
 
-# print(book)
+print(book)
 # DataFrame[value: string]
 
-# book.printSchema()
+book.printSchema()
 # root
 #  |-- value: string (nullable = true)
 
-# print(book.dtypes)
+print(book.dtypes)
 # [('value', 'string')]
 
 book.show(10, truncate=50)
-
 book.show(10, truncate=False, vertical=True)
 
 # simple column transformation
@@ -45,9 +43,28 @@ lines.show(5)
 # all sparksql functions
 # https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/functions.html
 
-
 # the simplest select statement
 book.select(book.value)
 book.select(book["value"])
+
+# the col function doesn't specify the the column comes from the book data frame
 book.select(col("value"))
 book.select("value")
+
+# split can use regular expression instead of a space, and an int about how many times
+# we apply the delimiter
+# lines = book.select(split(col("value"), " "))
+
+lines.printSchema()
+# root
+#  |-- line: array (nullable = true)
+#  |    |-- element: string (containsNull = true)
+
+# use .withColumnRenamed() to rename a column without changing the df
+
+# explode list into words
+
+words = lines.select(explode(col("line")).alias("word"))
+words.show(15)
+
+# change case and remove punctuation
