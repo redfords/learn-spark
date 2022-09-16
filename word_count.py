@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import explode, col, lower, split
+from pyspark.sql.functions import explode, col, lower, split, regexp_extract
 
 spark = (SparkSession
         .builder
@@ -63,12 +63,15 @@ lines.printSchema()
 # use .withColumnRenamed() to rename a column without changing the df
 
 # explode list into words
-
 words = lines.select(explode(col("line")).alias("word"))
 words.show(15)
 
 # change case and remove punctuation
-
 words_lower = words.select(lower(col("word")).alias("word_lower"))
 words_lower.show()
 
+# use regex to keep only letters a-z
+words_clean = words_lower.select(
+        regexp_extract(col("word_lower"), "[a-z]+", 0).alias("word")
+)
+words_clean.show()
