@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import explode, col, split
+from pyspark.sql.functions import explode, col, lower, split
 
 spark = (SparkSession
         .builder
@@ -68,3 +68,7 @@ words = lines.select(explode(col("line")).alias("word"))
 words.show(15)
 
 # change case and remove punctuation
+
+words_lower = words.select(lower(col("word")).alias("word_lower"))
+words_lower.show()
+
