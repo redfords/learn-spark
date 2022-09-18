@@ -23,3 +23,6 @@ exo2_4_df = spark.createDataFrame(
     [["key", 10_000, 20_000]], ["key", "value1", "value2"]
 )
 
+# remove all the occurrences of the words is
+# keep only the words with more than three characters using the length function
+# remove various words using the isin() method
