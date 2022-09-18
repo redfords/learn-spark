@@ -81,3 +81,14 @@ words_nonull = words_clean.filter(col("word") != "")
 words_nonull.show()
 
 # use ~ to negate as in filter(~(col("word") == "")
+
+# grouping records to count occurrences
+groups = words_nonull.groupby(col("word"))
+print(groups)
+results = words_nonull.groupby(col("word")).count()
+print(results)
+results.show()
+
+# display the top 10 words
+results.orderBy("count", ascending=False).show(10)
+results.orderBy(col("count").desc()).show(10)
