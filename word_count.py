@@ -75,3 +75,9 @@ words_clean = words_lower.select(
         regexp_extract(col("word_lower"), "[a-z]+", 0).alias("word")
 )
 words_clean.show()
+
+# filtering rows
+words_nonull = words_clean.filter(col("word") != "")
+words_nonull.show()
+
+# use ~ to negate as in filter(~(col("word") == "")
