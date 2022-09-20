@@ -92,3 +92,9 @@ results.show()
 # display the top 10 words
 results.orderBy("count", ascending=False).show(10)
 results.orderBy(col("count").desc()).show(10)
+
+# writing data from a data frame
+results.write.csv("./data/simple_count.csv")
+
+# use a single partition
+results.coalesce(1).write.csv("./data/simple_count_single_partition.csv")
