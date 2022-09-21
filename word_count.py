@@ -1,5 +1,13 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import explode, col, lower, split, regexp_extract
+from pyspark.sql.functions import (
+        col,
+        explode,
+        lower,
+        regexp_extract,
+        split,
+)
+
+# import pyspark.sql.functions as F
 
 spark = (SparkSession
         .builder
