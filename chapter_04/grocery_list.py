@@ -14,3 +14,4 @@ df_grocery_list = spark.createDataFrame(
 )
 
 df_grocery_list.printSchema()
+df_grocery_list.show(truncate=False)
