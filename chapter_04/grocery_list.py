@@ -8,3 +8,9 @@ my_grocery_list = [
     ["Carrot", 1, 1.09],
     ["Cake", 1, 10.99],
 ]
+
+df_grocery_list = spark.createDataFrame(
+    my_grocery_list, ["Item", "Quantity", "Price"]
+)
+
+df_grocery_list.printSchema()
