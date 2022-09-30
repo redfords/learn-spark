@@ -1,4 +1,5 @@
 from pyspark.sql import SparkSession
+import pyspark.sql.functions as F
 import os
 
 spark = SparkSession.builder.getOrCreate()
@@ -11,4 +12,22 @@ logs = spark.read.csv(
     header=True,
     inferSchema=True,
     timestampFormat="yyyy-MM-dd",
+)
+
+logs.printSchema()
+
+# Selecting five rows of the first three columns of our data frame
+logs.select("BroadcastLogID", "LogServiceID", "LogDate").show(5, False)
+
+# Four ways to select columns in PySpark, all equivalent in terms of results
+# Using the string to column conversion
+logs.select("BroadCastLogID", "LogServiceID", "LogDate")
+logs.select(*["BroadCastLogID", "LogServiceID", "LogDate"])
+
+# Passing the column object explicitly
+logs.select(
+    F.col("BroadCastLogID"), F.col("LogServiceID"), F.col("LogDate")
+)
+logs.select(
+    *[F.col("BroadCastLogID"), F.col("LogServiceID"), F.col("LogDate")]
 )
