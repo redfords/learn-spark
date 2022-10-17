@@ -35,6 +35,10 @@ logs.select(
     *[F.col("BroadCastLogID"), F.col("LogServiceID"), F.col("LogDate")]
 )
 
+# Split an array into multiple sub-arrays
+
 column_split = np.array_split(
     np.array(logs.columns), len(logs.columns)
 )
+
+print(column_split)
