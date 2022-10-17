@@ -1,6 +1,9 @@
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
+import numpy as np
 import os
+
+from sqlalchemy import column
 
 spark = SparkSession.builder.getOrCreate()
 
@@ -30,4 +33,8 @@ logs.select(
 )
 logs.select(
     *[F.col("BroadCastLogID"), F.col("LogServiceID"), F.col("LogDate")]
+)
+
+column_split = np.array_split(
+    np.array(logs.columns), len(logs.columns)
 )
