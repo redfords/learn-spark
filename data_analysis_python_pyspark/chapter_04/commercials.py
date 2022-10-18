@@ -42,3 +42,13 @@ column_split = np.array_split(
 )
 
 print(column_split)
+
+for x in column_split:
+    logs.select(*x).show(5, False)
+
+# Deleting columns
+logs = logs.drop("BroadcastLogID", "SequenceNO")
+
+# Testing if we effectively got rid of the columns
+print("BroadcastLogID" in logs.columns) # => False
+print("SequenceNo" in logs.columns) # => False
