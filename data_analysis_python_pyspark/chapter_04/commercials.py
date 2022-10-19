@@ -52,3 +52,8 @@ logs = logs.drop("BroadcastLogID", "SequenceNO")
 # Testing if we effectively got rid of the columns
 print("BroadcastLogID" in logs.columns) # => False
 print("SequenceNo" in logs.columns) # => False
+
+# Getting rid of columns, select style
+logs = logs.select(
+    *[x for x in logs.columns if x not in ["BroadcastLogID", "SequenceNO"]]
+)
