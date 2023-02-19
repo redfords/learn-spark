@@ -8,10 +8,13 @@ spark = (SparkSession
 
 # read from Paradise Lost, by John Milton
 
-print("File location using os.getcwd():", os.getcwd())
- 
-print(f"File location using __file__ variable: {os.path.realpath(os.path.dirname(__file__))}")
+base_dir = os.path.abspath(os.getcwd())
 
-BASE_DIR = "data_analysis_python_pyspark"
-# book = spark.read.text("../../20-0.txt")
-# book.printSchema()
+book = spark.read.text(os.path.join(base_dir, "20-0.txt"))
+book.printSchema()
+print(book.dtypes)
+
+# n (n of rows, default 20)
+# truncate (truncate strings longer than 20 chars, default True)
+# vertical (print rows vertically, default False)
+book.show(10, False, True)
