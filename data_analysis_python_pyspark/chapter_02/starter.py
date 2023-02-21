@@ -21,3 +21,5 @@ print(book.dtypes)
 book.show(10, False)
 
 # moving from a sentence to a list of words
+lines = book.select(split(book.value, " ").alias("line"))
+lines.show(5, False)
