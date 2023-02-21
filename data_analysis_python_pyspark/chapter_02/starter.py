@@ -1,4 +1,5 @@
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import split
 import os
 
 spark = (SparkSession
@@ -17,4 +18,6 @@ print(book.dtypes)
 # n (n of rows, default 20)
 # truncate (truncate strings longer than 20 chars, default True)
 # vertical (print rows vertically, default False)
-book.show(10, False, True)
+book.show(10, False)
+
+# moving from a sentence to a list of words
