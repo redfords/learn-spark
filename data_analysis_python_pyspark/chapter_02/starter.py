@@ -26,3 +26,6 @@ lines.show(5, False)
 
 # select statement
 book.select(book.value)
+book.select(book["value"])
+book.select(col("value"))
+book.select("value")
