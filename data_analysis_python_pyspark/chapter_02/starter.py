@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import split
+from pyspark.sql.functions import split, col
 import os
 
 spark = (SparkSession
@@ -23,3 +23,6 @@ book.show(10, False)
 # moving from a sentence to a list of words
 lines = book.select(split(book.value, " ").alias("line"))
 lines.show(5, False)
+
+# select statement
+book.select(book.value)
