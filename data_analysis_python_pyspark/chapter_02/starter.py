@@ -29,3 +29,8 @@ book.select(book.value)
 book.select(book["value"])
 book.select(col("value"))
 book.select("value")
+
+
+
+# change to lower case and remove punctuation
+# filter rows
